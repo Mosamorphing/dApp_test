@@ -128,3 +128,92 @@ export default App;
 ```
 
 Now, you can go to http://localhost:5173/Web3 to see the address rendererd.
+
+## Adapter Configuration
+
+The adapter configuration closely follows the guidelines outlined in the [official wagmi documentation](https://wagmi.sh/core/getting-started). For real-world projects, you will generally need to set up the JSON RPC endpoint and configure various wallets. This course begins with the most basic setup and will progressively help you understand the necessary configurations for your specific project.
+
+To start, open the `src/components/Web3.tsx` file and import the components or modules required for the configuration process.
+
+Starting with: 
+```bash
+import { createConfig, http } from 'wagmi';
+import { mainnet } from 'wagmi/chains';
+import { WagmiWeb3ConfigProvider } from '@ant-design/web3-wagmi';
+import { Address } from "@ant-design/web3";
+
+export default function Web3() {
+  return (
+    <Address format address="0xEcd0D12E21805803f70de03B72B1C162dB0898d9" />
+  );
+};
+```
+
+The content provided explains the following components and concepts related to the wagmi library and Ant Design Web3:
+
+- **[createConfig](https://wagmi.sh/react/config):** This is a method from the wagmi library used to set up a configuration for your application.
+- **HTTP Transport:** This method, part of the wagmi library, sets up an [HTTP JSON RPC](https://wagmi.sh/core/api/transports/http) connection. This connection allows you to interact with Ethereum or other compatible blockchains using HTTP requests.
+- **[Mainnet and Other Networks](https://wagmi.sh/react/chains):** The term "mainnet" refers to the Ethereum mainnet. Besides the mainnet, there are test networks like `sepolia`, and other public chains compatible with the Ethereum Virtual Machine (EVM), such as `bsc` (Binance Smart Chain) and `base`. These chains include both Layer 1 (L1) chains like Ethereum and Layer 2 (L2) solutions, although details on L2 chains are not covered in this section.
+- **[WagmiWeb3ConfigProvider](https://web3.ant.design/zh-CN/components/wagmi#wagmiweb3configproviderprops):** This is a component in Ant Design Web3 that acts as a provider for receiving configurations from the wagmi library.
+
+Next, you'll need to proceed with setting up your configuration.
+
+```bash
+import { createConfig, http } from "wagmi";
+import { mainnet } from "wagmi/chains";
+import { WagmiWeb3ConfigProvider } from "@ant-design/web3-wagmi";
+import { Address } from "@ant-design/web3";
+
+const config = createConfig({
+   chains: [mainnet],
+   transports: {
+     [mainnet.id]: http(),
+   },
+ });
+
+export default function Web3() {
+  return (
+     <WagmiWeb3ConfigProvider config={config}>
+        <Address format address="0xEcd0D12E21805803f70de03B72B1C162dB0898d9" />
+    </WagmiWeb3ConfigProvider>
+  );
+};
+```
+
+<Meaning-Based Translation>
+
+With the basic configuration for wagmi now complete, we can proceed to use Ant Design Web3 components to access data from the blockchain.
+
+As an example, let's explore how to use the NFTCard component from Ant-Design
+
+```bash
+import { createConfig, http } from "wagmi";
+import { mainnet } from "wagmi/chains";
+import { WagmiWeb3ConfigProvider } from "@ant-design/web3-wagmi";
+import { Address } from "@ant-design/web3";
+import { Address, NFTCard } from "@ant-design/web3";
+
+const config = createConfig({
+  chains: [mainnet],
+  transports: {
+    [mainnet.id]: http(),
+  },
+});
+
+export default function Web3() {
+  return (
+    <WagmiWeb3ConfigProvider config={config}>
+      <Address format address="0xEcd0D12E21805803f70de03B72B1C162dB0898d9" />
+    <NFTCard address="0xEcd0D12E21805803f70de03B72B1C162dB0898d9" tokenId={641} />
+    </WagmiWeb3ConfigProvider>
+  );
+};
+```
+The `NFTCard` component fetches the NFT data for tokenId 641 from the contract located at [0xEcd0D12E21805803f70de03B72B1C162dB0898d9](https://etherscan.io/address/0xEcd0D12E21805803f70de03B72B1C162dB0898d9) and displays it on the page.
+
+Here’s what it should look like:
+
+![](./img/nft-card.png)
+
+If the NFT doesn't display, please check your network connection. Congratulations! If you can see the NFT image rendered successfully, you've completed this lesson!
+
