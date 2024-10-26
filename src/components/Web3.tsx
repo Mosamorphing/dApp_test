@@ -6,7 +6,7 @@ import { Address, NFTCard } from "@ant-design/web3";
 const config = createConfig({
 chains: [mainnet],
 transports: {
-[mainnet.id]: http(), 
+[mainnet.id]: http('https://api.zan.top/node/v1/eth/mainnet/62a6e4c05a1b430db908dd482867f497'), 
     },
 });
 

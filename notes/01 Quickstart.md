@@ -32,7 +32,8 @@ npm create vite@latest
 
 Please follow the prompts to create a new project. We will name it as follows `dApp_test`. For specific technology stack selection, you can refer to the figure below:
 
-![img](./img/init-next.png)
+![img](./img/init-next.png) 
+<!-- replace with a ss of vite -->
 
 
 ## Install dependencies and start the project
@@ -47,6 +48,7 @@ npm i
 After the installation is complete, execute `npm run dev` to start the Project. You can visit the browser `http://localhost:5173` to check whether the project has started successfully.
 
 ![img2](./img/next-init-page.png)
+<!-- ?replace with the ss of the wallet address  -->
 
 
 ## Add Ant Design Web3
@@ -117,7 +119,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<h1>Welcome to My Project</h1>} />
+        <Route path="/" element={<h1>Welcome to my dApp testing ground</h1>} />
         <Route path="/web3" element={<Web3 />} />
       </Routes>
     </Router>
@@ -213,7 +215,7 @@ The `NFTCard` component fetches the NFT data for tokenId 641 from the contract l
 
 Here’s what it should look like:
 
-![](./img/nft-card.png)
+![img3](./img/next-init-page.png)
 
 If the NFT doesn't display, please check your network connection. Congratulations! If you can see the NFT image rendered successfully, you've completed this lesson!
 
